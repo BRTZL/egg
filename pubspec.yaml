@@ -1,0 +1,36 @@
+name: egg
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  cupertino_icons: ^1.0.0
+
+  firebase_analytics: ^6.3.0
+  firebase_core: ^0.5.3
+
+  flutter_secure_storage: ^3.3.5
+
+  vibration: ^1.7.3
+
+  quiver: ^2.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/content/
+    - assets/layout/
+    

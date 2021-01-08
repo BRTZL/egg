@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "137036528427",
+    "project_id": "egg-game-5db5a",
+    "storage_bucket": "egg-game-5db5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137036528427:android:c6efa75ea8e77d76ce636e",
+        "android_client_info": {
+          "package_name": "com.bartuozel.egg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137036528427-osuqunpe8fqi4i8te5s19qr6gt28s4dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-aFFshUH-Q_i9F9fxuq5Suas9gd_Oor4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137036528427-osuqunpe8fqi4i8te5s19qr6gt28s4dl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "137036528427-6bqc1fb043u495ebjrmor36o5koiovip.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bartuozel.egg"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
