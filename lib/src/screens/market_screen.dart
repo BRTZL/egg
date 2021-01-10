@@ -9,6 +9,7 @@ class MarketScreen extends StatefulWidget {
 }
 
 class _MarketScreenState extends State<MarketScreen> {
+  LocalStorageService localStorageService = LocalStorageService();
   RotatedBox getImage(int _degree, int _color, bool _upDown) {
     if (_upDown) {
       if (_degree == 0)
@@ -94,12 +95,22 @@ class _MarketScreenState extends State<MarketScreen> {
 
   int coin;
   int skin;
+  List<int> ownedSkins;
 
   @override
   void initState() {
     super.initState();
-    LocalStorageService().readCurrentSkin().then((value) => skin = value);
-    LocalStorageService().readCoin().then((value) => coin = value);
+    localStorageService.readCurrentSkin().then((value) => setState(() => skin = value));
+    localStorageService.readCoin().then((value) => setState(() => coin = value));
+    localStorageService.readOwnedSkins().then((value) => setState(() => ownedSkins = value));
+  }
+
+  Future changeSkin({@required int index}) async {
+    if (!ownedSkins.contains(index)) {
+      
+    }
+
+    await localStorageService.writeCurrentSkin(currentSkin: index);
   }
 
   @override
@@ -138,37 +149,36 @@ class _MarketScreenState extends State<MarketScreen> {
         ],
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.all(12.0),
         itemCount: 11,
         itemBuilder: (BuildContext context, int index) {
-          return FlatButton(
-            color: skin == index ? Colors.grey[300] : Colors.white,
-            onPressed: () => setState(() {
-              skin = index;
-              // _save();
-            }),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(width: 20),
-                Icon(
-                  skin == index ? Icons.lock_open : Icons.lock,
-                  size: 40,
-                  color: skin == index ? Color(0xffffc600) : Color(0xffffc600),
-                ),
-                SizedBox(width: 20),
-                Text('LOCKED'),
-                Spacer(flex: 4),
-                FittedBox(
-                  child: Row(
-                    children: <Widget>[
-                      getImage(3, index, false),
-                      getImage(1, index, true),
-                    ],
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FlatButton(
+              color: skin == index ? Colors.grey[300] : Colors.white,
+              onPressed: () async => await changeSkin(index: index),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(width: 20),
+                  Icon(
+                    ownedSkins.contains(index) ? Icons.lock_open : Icons.lock,
+                    size: 40,
+                    color: skin == index ? Color(0xffffc600) : Color(0xffffc600),
                   ),
-                ),
-                Spacer(),
-              ],
+                  SizedBox(width: 20),
+                  !ownedSkins.contains(index) ? Text('LOCKED') : SizedBox.shrink(),
+                  Spacer(flex: 4),
+                  FittedBox(
+                    child: Row(
+                      children: <Widget>[
+                        getImage(3, index, false),
+                        getImage(1, index, true),
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                ],
+              ),
             ),
           );
         },
